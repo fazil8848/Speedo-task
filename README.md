@@ -3,6 +3,7 @@
 This project is a comprehensive vehicle tracking system that visualizes and analyzes vehicle trips using GPS data. It includes features for calculating travel distance, idling, stoppages, and speed. The frontend, developed with React/Vue and Leaflet for mapping, displays routes and dynamically updates trip details. The backend, built with Express.js, manages data storage and calculations using MongoDB/MySQL.
 
 ## Table of Contents
+
 - [Features](#features)
 - [Technologies](#technologies)
 - [Setup Instructions](#setup-instructions)
@@ -30,6 +31,7 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 ## Technologies
 
 ### Frontend
+
 - **Framework**: React.js / Vue.js
 - **Libraries**: Leaflet (for map visualization), Tailwind CSS
 - **State Management**: React Context / Vuex
@@ -37,11 +39,13 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 - **Validation**: Formik and Yup
 
 ### Backend
+
 - **Framework**: Express.js
 - **Libraries**: Mongoose (MongoDB), Multer (for file uploads), Geolib (for distance calculation)
 - **Authentication**: JWT (JSON Web Tokens)
 
 ### Database
+
 - **Options**: MongoDB / MySQL
 
 ## Setup Instructions
@@ -54,12 +58,14 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/vehicle-travel-tracker.git
    cd vehicle-travel-tracker
    ```
 
 2. **Backend Setup**
+
    - Navigate to the backend directory and install dependencies.
      ```bash
      cd backend
@@ -78,6 +84,7 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
      ```
 
 3. **Frontend Setup**
+
    - Navigate to the frontend directory and install dependencies.
      ```bash
      cd frontend
@@ -105,18 +112,19 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 
 ## API Endpoints
 
-| Method | Endpoint              | Description                          |
-|--------|------------------------|--------------------------------------|
-| POST   | `/auth/register`       | Register a new user                 |
-| POST   | `/auth/login`          | Login user                          |
-| GET    | `/trip/getTrips`       | Retrieve all trips for a user       |
-| POST   | `/trip/addTrip`        | Upload a new trip                   |
-| DELETE | `/trip/deleteTrips`    | Delete selected trips               |
-| POST   | `/trip/getSelectedTrips` | Fetch details for selected trips    |
+| Method | Endpoint                 | Description                      |
+| ------ | ------------------------ | -------------------------------- |
+| POST   | `/auth/register`         | Register a new user              |
+| POST   | `/auth/login`            | Login user                       |
+| GET    | `/trip/getTrips`         | Retrieve all trips for a user    |
+| POST   | `/trip/addTrip`          | Upload a new trip                |
+| DELETE | `/trip/deleteTrips`      | Delete selected trips            |
+| POST   | `/trip/getSelectedTrips` | Fetch details for selected trips |
 
 ## Database Structure
 
 ### MongoDB / MySQL Tables
+
 - **Users**: Store user details (name, email, password)
 - **Trips**: Contains trip details like trip ID, user ID, start time, end time, and distance.
 - **Coordinates**: Stores GPS coordinates (latitude, longitude, timestamp, speed)
@@ -124,6 +132,7 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 ## Project Structure
 
 ### Backend
+
 ```plaintext
 backend/
 ├── config/             # Configuration files (e.g., MongoDB connection)
@@ -136,6 +145,7 @@ backend/
 ```
 
 ### Frontend
+
 ```plaintext
 frontend/
 ├── src/
@@ -158,12 +168,3 @@ frontend/
 ## License
 
 This project is licensed under the MIT License.
-```
-
----
-
-### Notes:
-1. Replace `https://github.com/yourusername/vehicle-travel-tracker.git` with your actual GitHub repository link.
-2. Adjust `.env` settings according to your configuration.
-
-This README provides a full project overview, installation and usage instructions, API documentation, and project structure breakdown for easy onboarding and setup. Let me know if you'd like further customization!
