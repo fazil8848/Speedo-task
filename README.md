@@ -123,7 +123,7 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 
 ## Database Structure
 
-### MongoDB / MySQL Tables
+### MongoDB
 
 - **Users**: Store user details (name, email, password)
 - **Trips**: Contains trip details like trip ID, user ID, start time, end time, and distance.
