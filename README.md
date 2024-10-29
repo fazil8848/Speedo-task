@@ -32,9 +32,9 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 
 ### Frontend
 
-- **Framework**: React.js / Vue.js
+- **Framework**: React.js
 - **Libraries**: Leaflet (for map visualization), Tailwind CSS
-- **State Management**: React Context / Vuex
+- **State Management**: React Context 
 - **Notifications**: React Hot Toast
 - **Validation**: Formik and Yup
 
@@ -46,21 +46,21 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 
 ### Database
 
-- **Options**: MongoDB / MySQL
+- **Options**: MongoDB 
 
 ## Setup Instructions
 
 ### Prerequisites
 
 - Node.js (v14+)
-- MongoDB or MySQL database instance
+- MongoDB 
 
 ### Installation
 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/vehicle-travel-tracker.git
+   git clone https://github.com/fazil8848/Vehicle-Travel-Tracker.git
    cd vehicle-travel-tracker
    ```
 
@@ -80,7 +80,7 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
      ```
    - Start the backend server.
      ```bash
-     npm run dev
+     npm run dev or npm start
      ```
 
 3. **Frontend Setup**
@@ -100,7 +100,7 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
      ```
 
 4. **Access the Application**
-   - Frontend: `http://localhost:3000`
+   - Frontend: `http://localhost:5173`
    - Backend API: `http://localhost:5000`
 
 ## Usage
