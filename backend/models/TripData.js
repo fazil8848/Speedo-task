@@ -20,6 +20,8 @@ const tripSchema = new mongoose.Schema({
       ignition: { type: String, required: true },
       distanceCovered: { type: Number, default: 0 },
       speedOfTheVehicle: { type: Number, default: 0 },
+      idlingDuration: { type: Number, default: 0 },
+      stoppageDuration: { type: Number, default: 0 },
     },
   ],
   overspeedSegments: [

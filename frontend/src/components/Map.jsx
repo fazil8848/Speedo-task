@@ -1,15 +1,28 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Polyline,
+  Popup,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
 import Loader from "./Loader";
-import { MapPinCheckInside, MapPinHouse } from "lucide-react";
-import { setLocale } from "yup";
+import L from "leaflet";
 
 const Map = ({ selectedTrip }) => {
+  function formatTravelDuration(durationInSeconds) {
+    const hours = Math.floor(durationInSeconds / 3600);
+    const minutes = Math.floor((durationInSeconds % 3600) / 60);
+    const seconds = Math.floor(durationInSeconds % 60);
+
+    return `${hours > 0 ? hours + " Hr " : ""}${
+      minutes > 0 ? minutes + " Mins " : ""
+    }${seconds} Seconds`;
+  }
+
   const handleRouteColor = (coord) => {
     console.log(coord);
-
     if (coord.speedOfTheVehicle > 60) {
       return "#00FFD1";
     } else if (coord.ignition === "off") {
@@ -28,6 +41,12 @@ const Map = ({ selectedTrip }) => {
   ) {
     return <Loader />;
   }
+
+  let lastValidPosition = [
+    selectedTrip.coordinates[0].latitude,
+    selectedTrip.coordinates[0].longitude,
+  ];
+  const polylines = [];
 
   return (
     <>
@@ -62,25 +81,69 @@ const Map = ({ selectedTrip }) => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
+
           {selectedTrip.coordinates.map((coord, index) => {
-            if (index === selectedTrip.coordinates.length - 1) return null;
+            const currentPos = [coord.latitude, coord.longitude];
+            const isIdling =
+              coord.ignition === "on" && coord.speedOfTheVehicle === 0;
+            const isStopped = coord.ignition === "off";
 
-            const start = [coord.latitude, coord.longitude];
-            const end = [
-              selectedTrip.coordinates[index + 1].latitude,
-              selectedTrip.coordinates[index + 1].longitude,
-            ];
-            const color = handleRouteColor(coord);
+            if (isIdling) {
+              return (
+                <Marker
+                  key={`idle-${index}`}
+                  position={currentPos}
+                  icon={L.divIcon({
+                    className: "custom-marker",
+                    html: `<div style="background-color: #FF00B8; border-radius: 50%; width: 12px; height: 12px;"></div>`,
+                  })}
+                >
+                  <Popup>
+                    Vehicle idled here for{" "}
+                    {formatTravelDuration(coord.idlingDuration)}
+                  </Popup>
+                </Marker>
+              );
+            }
 
-            return (
-              <Polyline
-                key={index}
-                positions={[start, end]}
-                color={color}
-                weight={8}
-              />
-            );
+            if (isStopped) {
+              return (
+                <Marker
+                  key={`stopped-${index}`}
+                  position={currentPos}
+                  icon={L.divIcon({
+                    className: "custom-marker",
+                    html: `<div style="background-color: red; border-radius: 50%; width: 12px; height: 12px;"></div>`,
+                  })}
+                >
+                  <Popup className="bg-red-500">
+                    Vehicle stopped here for{" "}
+                    {formatTravelDuration(coord.stoppageDuration)}
+                  </Popup>
+                </Marker>
+              );
+            }
+
+            if (lastValidPosition) {
+              polylines.push(
+                <Polyline
+                  key={index}
+                  positions={[lastValidPosition, currentPos]}
+                  color={handleRouteColor(coord)}
+                  weight={8}
+                />
+              );
+            }
+
+            if (coord.speedOfTheVehicle > 0 || isStopped) {
+              lastValidPosition = currentPos;
+            }
+
+            return null;
           })}
+
+          {polylines}
+
           {selectedTrip.coordinates.map((coord, index) => {
             if (index === 0 || index === selectedTrip.coordinates.length - 1) {
               return (

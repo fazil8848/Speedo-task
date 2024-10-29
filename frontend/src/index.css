@@ -65,16 +65,14 @@
   }
 }
 
-.dial {
-  animation: rotate 2s infinite alternate;
-  transform-origin: center;
+/* Override default Leaflet popup styles */
+.leaflet-popup-content-wrapper {
+  background-color: red !important; /* Red background color */
+  color: white !important; /* White text */
+  border-radius: 5px !important; /* Rounded corners */
+  padding: 10px !important; /* Padding inside the popup */
 }
 
-@keyframes rotate {
-  0% {
-    transform: rotate(-30deg); /* Starting position */
-  }
-  100% {
-    transform: rotate(30deg); /* Ending position */
-  }
+.leaflet-popup-tip {
+  background-color: red !important; /* Red arrow color */
 }

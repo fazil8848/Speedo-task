@@ -52,6 +52,8 @@ const addTrip = async (req, res) => {
           ignition,
           distanceCovered: 0,
           speedOfTheVehicle: 0,
+          idlingDuration: 0,
+          stoppageDuration: 0,
         });
       })
       .on("end", async () => {
@@ -63,6 +65,8 @@ const addTrip = async (req, res) => {
         const overspeedSegments = [];
 
         const SPEED_LIMIT = 60;
+        let startIdleTime = null;
+        let startStopTime = null;
 
         for (let i = 1; i < coordinates.length; i++) {
           const prev = coordinates[i - 1];
@@ -97,15 +101,50 @@ const addTrip = async (req, res) => {
           }
 
           if (curr.ignition === "on" && speed === 0) {
+            if (!startIdleTime) {
+              startIdleTime = prev.timestamp;
+            }
             totalIdlingDuration += timeDiff / 60;
-          } else if (curr.ignition === "off") {
-            totalStoppageDuration += timeDiff;
+            curr.idlingDuration = timeDiff / 60;
+          } else if (startIdleTime) {
+            const idleTime = (curr.timestamp - startIdleTime) / 1000;
+            for (let j = i - 1; j >= 0; j--) {
+              if (
+                coordinates[j].ignition === "on" &&
+                coordinates[j].speedOfTheVehicle === 0
+              ) {
+                coordinates[j].idlingDuration = idleTime;
+              } else {
+                break;
+              }
+            }
+            startIdleTime = null;
+          }
+
+          if (curr.ignition === "off") {
+            if (!startStopTime) {
+              startStopTime = prev.timestamp;
+            }
+            totalStoppageDuration += timeDiff / 60;
+            curr.stoppageDuration = timeDiff / 60;
+          } else if (startStopTime) {
+            const stopTime = (curr.timestamp - startStopTime) / 1000;
+            for (let j = i - 1; j >= 0; j--) {
+              if (coordinates[j].ignition === "off") {
+                coordinates[j].stoppageDuration = stopTime;
+              } else {
+                break;
+              }
+            }
+            startStopTime = null;
           }
         }
 
         if (coordinates.length > 0) {
           coordinates[0].distanceCovered = 0;
           coordinates[0].speedOfTheVehicle = 0;
+          coordinates[0].idlingDuration = 0;
+          coordinates[0].stoppageDuration = 0;
         }
 
         const totalTripDuration =
