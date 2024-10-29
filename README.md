@@ -1,6 +1,6 @@
 # Vehicle Travel Tracker
 
-This project is a comprehensive vehicle tracking system that visualizes and analyzes vehicle trips using GPS data. It includes features for calculating travel distance, idling, stoppages, and speed. The frontend, developed with React/Vue and Leaflet for mapping, displays routes and dynamically updates trip details. The backend, built with Express.js, manages data storage and calculations using MongoDB/MySQL.
+This project is a comprehensive vehicle tracking system that visualizes and analyzes vehicle trips using GPS data. It includes features for calculating travel distance, idling, stoppages, and speed. The frontend, developed with React and Leaflet for mapping, displays routes and dynamically updates trip details. The backend, built with Express.js, manages data storage and calculations using MongoDB.
 
 ## Table of Contents
 
@@ -34,7 +34,7 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 
 - **Framework**: React.js
 - **Libraries**: Leaflet (for map visualization), Tailwind CSS
-- **State Management**: React Context 
+- **State Management**: React Context
 - **Notifications**: React Hot Toast
 - **Validation**: Formik and Yup
 
@@ -46,14 +46,14 @@ This project is a comprehensive vehicle tracking system that visualizes and anal
 
 ### Database
 
-- **Options**: MongoDB 
+- **Options**: MongoDB
 
 ## Setup Instructions
 
 ### Prerequisites
 
 - Node.js (v14+)
-- MongoDB 
+- MongoDB
 
 ### Installation
 
