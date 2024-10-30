@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { loginUser } from "@/services/apiService";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export default function Login() {
         navigate("/dashboard");
       } catch (error) {
         console.log("Error in login", error);
-        toast.error("Error logging in");
+        toast.error(error?.response?.data?.error);
       }
     },
   });
@@ -100,6 +100,9 @@ export default function Login() {
               Sign in
             </Button>
           </form>
+          <div className="text-center">
+            Not an existing user? <Link to="/signup">Sign UP</Link>
+          </div>
         </CardContent>
       </Card>
     </div>

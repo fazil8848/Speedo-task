@@ -123,7 +123,7 @@ export default function TripDetails() {
         />
       ),
       value: selectedTrip
-        ? formatTravelDuration(selectedTrip.totalStoppageDuration)
+        ? formatDuration(selectedTrip.totalStoppageDuration)
         : "0 Hr 0 Mins",
       label: "Stopped Duration",
     },
