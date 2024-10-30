@@ -22,7 +22,6 @@ const Map = ({ selectedTrip }) => {
   }
 
   const handleRouteColor = (coord) => {
-    console.log(coord);
     if (coord.speedOfTheVehicle > 60) {
       return "#00FFD1";
     } else if (coord.ignition === "off") {
