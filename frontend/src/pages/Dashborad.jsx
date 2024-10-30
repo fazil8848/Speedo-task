@@ -57,7 +57,6 @@ export default function Dashboard() {
         return toast.error("Please select atleast 1 trip");
       }
       const response = await deleteTripsAPI(selectedTrips);
-      console.log(response);
       setTrips((pre) =>
         pre.filter((trips) => !selectedTrips.includes(trips._id))
       );
